@@ -2,6 +2,7 @@
 
 namespace Mission6.Models
 {
+    // Categories model
     public class Category
     {
         [Key]

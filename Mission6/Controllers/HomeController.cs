@@ -12,14 +12,22 @@ namespace Mission6.Controllers
         {
             _context = context;
         }
+
+        // Home page
         public IActionResult Index()
         {
             return View();
         }
+
+
+        // About page
         public IActionResult AboutJoel()
         {
             return View("AboutJoel");
         }
+
+
+        // Form for movies
         [HttpGet]
         public IActionResult MovieForm()
         {
@@ -45,17 +53,14 @@ namespace Mission6.Controllers
                     .OrderBy(x => x.CategoryId)
                     .ToList();
                 return View("MovieForm", response);
-            }
-            
-            
-            
-
+            }     
         }
 
+
+        // List of movies
         [HttpGet]
         public IActionResult MovieTable()
         {
-
             var movies = _context.Movies
                 .Include("Category")
                 .OrderBy(x => x.MovieId)
@@ -64,6 +69,9 @@ namespace Mission6.Controllers
             return View("MovieTable", movies);
         }
 
+
+
+        // Edit a movie in the list of movies
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -81,6 +89,27 @@ namespace Mission6.Controllers
         public IActionResult Edit(Movie recordUpdated)
         {
             _context.Update(recordUpdated);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieTable");
+        }
+
+
+
+        // Delete movies from list
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var deletedRecord = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View("ConfirmDelete", deletedRecord);
+        }
+
+        [HttpPost]  
+        public IActionResult Delete(Movie deletedRecord)
+        {
+            _context.Movies.Remove(deletedRecord);
             _context.SaveChanges();
 
             return RedirectToAction("MovieTable");

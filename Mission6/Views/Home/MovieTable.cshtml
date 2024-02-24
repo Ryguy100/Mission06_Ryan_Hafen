@@ -1,5 +1,5 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    The list of all movies
 *@
 @{
 }
@@ -21,6 +21,9 @@
         </tr>
     </thead>
     <tbody>
+        @*
+            Adds all the values of from each row of the database into a row in the table
+        *@
         @foreach (var row in Model)
         {
         <tr>
@@ -48,8 +51,11 @@
             }
             <td>@row.Notes</td>
 
+            @*
+                The add and delete buttons on the table
+            *@
             <td><a class="btn btn-outline-primary" asp-controller="Home" asp-action="Edit" asp-route-id="@row.MovieId">Edit</a></td>
-            <td><a class="btn btn-outline-danger">Delete</a></td>
+            <td><a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@row.MovieId">Delete</a></td>
         </tr>
         }
     </tbody>

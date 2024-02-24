@@ -1,4 +1,7 @@
-﻿@{
+﻿@*
+    The form page for adding data to the database
+*@
+@{
     ViewData["Title"] = "Movie Form";
 }
 
@@ -9,17 +12,24 @@
 </div>
 <div class="container">
     <form method="post">
+        <input type="hidden" asp-for="MovieId" />
         <div class="row mb-3">
             <div class="col-sm-6">
                 <label asp-for="CategoryId" class="form-label">Category <small>(optional)</small></label>
                 <select class="form-select" asp-for="CategoryId">
                     <option value="" selected>Select an option</option>
+                   @*
+                       Adds all the categories in the form
+                   *@
                     @foreach (Category c in ViewBag.Categories)
                     {
                         <option value="@c.CategoryId">@c.CategoryName</option>
                     }
                 </select>
             </div>
+            @*
+                Title
+            *@
             <div class="col-sm-6">
                 <label asp-for="Title" class="form-label">Title</label>
                 <input asp-for="Title" type="text" class="form-control" id="Title" name="Title">
@@ -27,10 +37,16 @@
         </div>
 
         <div class="row mb-3">
+            @*
+                Year
+            *@
             <div class="col-sm-6">
                 <label asp-for="Year" class="form-label">Year</label>
                 <input asp-for="Year" type="number" class="form-control" id="Year" name="Year">
             </div>
+            @*
+                Director
+            *@
             <div class="col-sm-6">
                 <label asp-for="Director" class="form-label">Director <small>(optional)</small></label>
                 <input asp-for="Director" type="text" class="form-control" id="Director" name="Director">
@@ -38,6 +54,9 @@
         </div>
 
         <div class="row mb-3">
+            @*
+                Rating
+            *@
             <div class="col-sm-6">
                 <label asp-for="Rating" class="form-label">Rating <small>(optional)</small></label>
                 <select asp-for="Rating"class="form-select" id="Rating" name="Rating">
@@ -57,6 +76,9 @@
 
                 </select>
             </div>
+            @*
+                Edited
+            *@
             <div class="col-sm-6">
                 <label asp-for="Edited" class="form-label">Edited</label>
                 <select asp-for="Edited" class="form-select" id="Edited" name="Edited">
@@ -68,10 +90,16 @@
         </div>
 
         <div class="row mb-3">
+            @*
+                Lent to:
+            *@
             <div class="col-sm-6">
                 <label asp-for="LentTo" class="form-label">Lent to: <small>(optional)</small></label>
                 <input asp-for="LentTo" type="text" class="form-control" id="LentTo" name="LentTo">
             </div>
+            @*
+                Plex
+            *@
             <div class="col-sm-6">
                 <label asp-for="CopiedToPlex" class="form-label">Copied to Plex?</label>
                 <select asp-for="CopiedToPlex" class="form-select">
@@ -82,6 +110,9 @@
             </div>
         </div>
         <div class="row mb-3">
+            @*
+                Notes
+            *@
             <div class="col-sm-12">
                 <label asp-for="Notes" class="form-label">Notes <small>(optional)</small></label>
                 <input asp-for="Notes" type="text" class="form-control" id="Notes" name="Notes">
@@ -89,6 +120,10 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
+        
+        @*
+            A little tad of data validation
+        *@
         <div asp-validation-summary="All"></div>
     </form>
 </div>

@@ -3,8 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission6.Models
 {
+    // Model for the Movies
+    // Error messages for data validation
     public class Movie
     {
+        // Primary key
         [Key]
         [Required]
         public int MovieId { get; set; }
@@ -17,6 +20,7 @@ namespace Mission6.Models
         public string Title { get; set; }
 
         [Required(ErrorMessage = "The Year field is required")]
+        [Range(1888, int.MaxValue, ErrorMessage = "Enter a year greater than 1888")]
         public int? Year { get; set; }
         
         public string? Director {  get; set; }

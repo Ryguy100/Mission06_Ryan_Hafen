@@ -1,0 +1,15 @@
+﻿@*
+    Confirm deletion page
+*@
+@{
+}
+
+@model Movie
+
+<h2>Confirm Deletion</h2>
+<h3>@Model.Title will be permenantely deleted. Continue?</h3>
+<form method="post">
+    <input type="hidden" asp-for="MovieId" />
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="MovieTable">Cancel</a>
+</form>
